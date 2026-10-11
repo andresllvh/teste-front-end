@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import ProductModal from './components/ProductModal/ProductModal'
@@ -42,6 +43,7 @@ function App() {
 
       <main>
         <Hero />
+        <Categories />
 
         <Showcase
           title="Produtos relacionados"

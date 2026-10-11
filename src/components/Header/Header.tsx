@@ -9,7 +9,7 @@ import {
   ShieldIcon,
   TruckIcon,
   UserIcon,
-} from './icons'
+} from '../icons/headerIcons'
 import './Header.scss'
 
 const CATEGORIES = [

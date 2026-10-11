@@ -1,0 +1,67 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.categories {
+  @include container;
+
+  padding-top: 40px;
+
+  // O layout não mostra título nesta seção; ele fica só para leitores de tela.
+  &__title {
+    @include visually-hidden;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 4px 4px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.875rem;
+    color: $color-text-soft;
+    white-space: nowrap;
+
+    &[aria-pressed='true'] {
+      font-weight: 600;
+      color: $color-primary;
+
+      .categories__icon {
+        color: $color-primary;
+        background-color: $color-surface;
+      }
+    }
+
+    &:hover .categories__icon {
+      color: $color-primary;
+    }
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 120px;
+    height: 120px;
+    color: $color-text;
+    background-color: $color-muted-surface;
+    border-radius: $radius;
+    box-shadow: $shadow-card;
+    transition: color 0.2s;
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 88px;
+      height: 88px;
+    }
+  }
+}
