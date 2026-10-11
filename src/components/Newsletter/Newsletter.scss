@@ -1,0 +1,122 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.newsletter {
+  margin-top: 48px;
+  color: $color-surface;
+  background-color: $color-dark;
+
+  &__content {
+    @include container;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 48px;
+    padding-block: 40px;
+  }
+
+  &__intro {
+    max-width: 440px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    font-size: 0.75rem;
+  }
+
+  // Grade de 3 colunas: nome, e-mail e botão na primeira linha;
+  // os termos ocupam a segunda linha inteira.
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    width: 100%;
+    max-width: 640px;
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__label {
+    @include visually-hidden;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    input {
+      height: 40px;
+      padding: 0 16px;
+      font: inherit;
+      font-size: 0.875rem;
+      color: $color-text;
+      background-color: $color-surface;
+      border: 2px solid transparent;
+      border-radius: 6px;
+
+      &::placeholder {
+        color: $color-text-muted;
+      }
+
+      &[aria-invalid='true'] {
+        border-color: $color-error;
+      }
+    }
+  }
+
+  &__button {
+    height: 40px;
+    padding: 0 48px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $color-text;
+    text-transform: uppercase;
+    background-color: $color-accent;
+    border-radius: 6px;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+
+  &__terms {
+    grid-column: 1 / -1;
+    font-size: 0.75rem;
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 14px;
+      height: 14px;
+      accent-color: $color-accent;
+    }
+  }
+
+  &__error {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.75rem;
+    color: $color-error-light;
+  }
+
+  &__success {
+    font-weight: 600;
+    color: $color-accent;
+  }
+}

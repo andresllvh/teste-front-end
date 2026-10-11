@@ -3,6 +3,7 @@ import Brands from './components/Brands/Brands'
 import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
+import Newsletter from './components/Newsletter/Newsletter'
 import PartnerBanners from './components/PartnerBanners/PartnerBanners'
 import ProductModal from './components/ProductModal/ProductModal'
 import Showcase, { type LoadStatus } from './components/Showcase/Showcase'
@@ -74,6 +75,8 @@ function App() {
           status={status}
           onSelectProduct={setSelectedProduct}
         />
+
+        <Newsletter />
 
         {selectedProduct && (
           <ProductModal
