@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import type { Product } from '../../types/product'
 import ProductCard from '../ProductCard/ProductCard'
 import './Showcase.scss'
@@ -18,12 +18,22 @@ const TABS = [
 
 interface ShowcaseProps {
   title: string
+  // A primeira vitrine do layout tem abas; as outras, um link "Ver todos".
+  showTabs?: boolean
   products: Product[]
   status: LoadStatus
   onSelectProduct: (product: Product) => void
 }
 
-function Showcase({ title, products, status, onSelectProduct }: ShowcaseProps) {
+function Showcase({
+  title,
+  showTabs = false,
+  products,
+  status,
+  onSelectProduct,
+}: ShowcaseProps) {
+  // A página tem várias vitrines; o useId gera um id único para cada título.
+  const titleId = useId()
   const [activeTab, setActiveTab] = useState(TABS[0])
   const listRef = useRef<HTMLUListElement>(null)
 
@@ -35,24 +45,30 @@ function Showcase({ title, products, status, onSelectProduct }: ShowcaseProps) {
   }
 
   return (
-    <section className="showcase" aria-labelledby="showcase-title">
-      <h2 id="showcase-title" className="showcase__title">
+    <section className="showcase" aria-labelledby={titleId}>
+      <h2 id={titleId} className="showcase__title">
         {title}
       </h2>
 
-      <div className="showcase__tabs">
-        {TABS.map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            className="showcase__tab"
-            aria-pressed={tab === activeTab}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+      {showTabs ? (
+        <div className="showcase__tabs">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              className="showcase__tab"
+              aria-pressed={tab === activeTab}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <a href="#" className="showcase__see-all">
+          Ver todos
+        </a>
+      )}
 
       {status === 'loading' && (
         <p className="showcase__message" role="status">

@@ -26,6 +26,19 @@
     }
   }
 
+  &__see-all {
+    display: block;
+    width: fit-content;
+    margin: -12px auto 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $color-text;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
   &__tabs {
     display: flex;
     margin-bottom: 24px;

@@ -49,6 +49,16 @@ function App() {
 
         <Showcase
           title="Produtos relacionados"
+          showTabs
+          products={products}
+          status={status}
+          onSelectProduct={setSelectedProduct}
+        />
+
+        <PartnerBanners />
+
+        <Showcase
+          title="Produtos relacionados"
           products={products}
           status={status}
           onSelectProduct={setSelectedProduct}
@@ -57,6 +67,13 @@ function App() {
         <PartnerBanners />
 
         <Brands />
+
+        <Showcase
+          title="Produtos relacionados"
+          products={products}
+          status={status}
+          onSelectProduct={setSelectedProduct}
+        />
 
         {selectedProduct && (
           <ProductModal
