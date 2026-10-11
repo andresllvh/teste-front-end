@@ -10,7 +10,7 @@
   // branco ter contraste suficiente sobre qualquer parte da imagem.
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 70%),
-    url('../../assets/banner-black-friday.jpg') center 40% / cover no-repeat;
+    url('../../assets/banner-black-friday.webp') center 40% / cover no-repeat;
 
   &__content {
     @include container;
