@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header/Header'
+import Hero from './components/Hero/Hero'
 import ProductModal from './components/ProductModal/ProductModal'
 import Showcase, { type LoadStatus } from './components/Showcase/Showcase'
 import { fetchProducts } from './services/products'
@@ -40,6 +41,8 @@ function App() {
       <Header />
 
       <main>
+        <Hero />
+
         <Showcase
           title="Produtos relacionados"
           products={products}
