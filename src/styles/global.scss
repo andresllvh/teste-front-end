@@ -41,3 +41,8 @@ a {
 ul {
   list-style: none;
 }
+
+// O reset acima zera a margem que o navegador usa para centralizar o <dialog>.
+dialog {
+  margin: auto;
+}

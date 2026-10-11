@@ -3,9 +3,10 @@ import { formatPrice } from '../../utils/formatPrice'
 
 interface ProductCardProps {
   product: Product
+  onBuy: (product: Product) => void
 }
 
-function ProductCard({ product }: ProductCardProps) {
+function ProductCard({ product, onBuy }: ProductCardProps) {
   return (
     <article className="product-card">
       <img
@@ -21,7 +22,11 @@ function ProductCard({ product }: ProductCardProps) {
       <p className="product-card__price">{formatPrice(product.price)}</p>
       <p className="product-card__shipping">Frete grátis</p>
 
-      <button type="button" className="product-card__buy">
+      <button
+        type="button"
+        className="product-card__buy"
+        onClick={() => onBuy(product)}
+      >
         Comprar
       </button>
     </article>

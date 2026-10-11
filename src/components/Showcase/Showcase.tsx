@@ -7,9 +7,15 @@ interface ShowcaseProps {
   title: string
   products: Product[]
   status: LoadStatus
+  onSelectProduct: (product: Product) => void
 }
 
-function Showcase({ title, products, status }: ShowcaseProps) {
+function Showcase({
+  title,
+  products,
+  status,
+  onSelectProduct,
+}: ShowcaseProps) {
   return (
     <section className="showcase" aria-labelledby="showcase-title">
       <h2 id="showcase-title" className="showcase__title">
@@ -32,7 +38,7 @@ function Showcase({ title, products, status }: ShowcaseProps) {
         <ul className="showcase__list">
           {products.map((product) => (
             <li key={product.productName}>
-              <ProductCard product={product} />
+              <ProductCard product={product} onBuy={onSelectProduct} />
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ProductModal from './components/ProductModal/ProductModal'
 import Showcase, { type LoadStatus } from './components/Showcase/Showcase'
 import { fetchProducts } from './services/products'
 import type { Product } from './types/product'
@@ -6,6 +7,7 @@ import type { Product } from './types/product'
 function App() {
   const [products, setProducts] = useState<Product[]>([])
   const [status, setStatus] = useState<LoadStatus>('loading')
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   useEffect(() => {
     // Evita atualizar o estado se o componente for desmontado antes da
@@ -38,7 +40,15 @@ function App() {
         title="Produtos relacionados"
         products={products}
         status={status}
+        onSelectProduct={setSelectedProduct}
       />
+
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </main>
   )
 }
