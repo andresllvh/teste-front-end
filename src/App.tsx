@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Brands from './components/Brands/Brands'
 import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
@@ -54,6 +55,8 @@ function App() {
         />
 
         <PartnerBanners />
+
+        <Brands />
 
         {selectedProduct && (
           <ProductModal

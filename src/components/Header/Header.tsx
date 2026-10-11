@@ -10,6 +10,7 @@ import {
   TruckIcon,
   UserIcon,
 } from '../icons/headerIcons'
+import Logo from '../Logo/Logo'
 import './Header.scss'
 
 const CATEGORIES = [
@@ -51,7 +52,7 @@ function Header() {
           className="header__logo"
           aria-label="Econverse, página inicial"
         >
-          <span className="header__logo-mark">ec</span>onverse
+          <Logo />
         </a>
 
         <form className="header__search" role="search" onSubmit={handleSearch}>
