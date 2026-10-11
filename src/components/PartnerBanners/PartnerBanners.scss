@@ -1,0 +1,72 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+$banner-shadow-color: #120c07;
+
+.partner-banners {
+  @include container;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding-block: 24px;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  &__banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 350px;
+    padding: 40px;
+    color: $color-surface;
+    border-radius: 16px;
+    // A foto fica encostada à direita, na altura do banner. O degradê
+    // escurece a esquerda, onde fica o texto, e se funde com a foto.
+    background:
+      linear-gradient(
+        90deg,
+        $banner-shadow-color 0%,
+        $banner-shadow-color 40%,
+        rgba($banner-shadow-color, 0) 70%
+      ),
+      url('../../assets/banner-parceiros.jpg') right center / auto 100%
+        no-repeat,
+      $banner-shadow-color;
+
+    @media (max-width: $breakpoint-mobile) {
+      min-height: 280px;
+      padding: 32px 24px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  &__text {
+    max-width: 180px;
+    margin-bottom: 32px;
+  }
+
+  &__button {
+    padding: 14px 32px;
+    font-weight: 700;
+    color: $color-text;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: $color-accent;
+    border-radius: 4px;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+}

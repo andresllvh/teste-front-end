@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Categories from './components/Categories/Categories'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
+import PartnerBanners from './components/PartnerBanners/PartnerBanners'
 import ProductModal from './components/ProductModal/ProductModal'
 import Showcase, { type LoadStatus } from './components/Showcase/Showcase'
 import { fetchProducts } from './services/products'
@@ -51,6 +52,8 @@ function App() {
           status={status}
           onSelectProduct={setSelectedProduct}
         />
+
+        <PartnerBanners />
 
         {selectedProduct && (
           <ProductModal
