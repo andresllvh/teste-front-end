@@ -1,0 +1,182 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  &__topbar {
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__benefits {
+    @include container;
+
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    padding-block: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    li {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: $color-text-muted;
+    }
+
+    strong {
+      font-weight: 600;
+      color: $color-primary;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      justify-content: flex-start;
+      gap: 32px;
+    }
+  }
+
+  &__main {
+    @include container;
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-block: 20px;
+
+    // No celular a busca desce para uma linha própria.
+    @media (max-width: $breakpoint-mobile) {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: $color-text;
+  }
+
+  // Círculo amarelo atrás do "ec", como no logo do layout.
+  &__logo-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: -0.55em;
+    color: $color-surface;
+    background-color: $color-accent;
+    border-radius: 50%;
+    text-indent: -0.55em;
+  }
+
+  &__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    max-width: 640px;
+    margin-inline: auto;
+    padding-right: 16px;
+    background-color: $color-input;
+    border-radius: $radius;
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px 20px;
+      font: inherit;
+      font-size: 0.875rem;
+      color: $color-text;
+      background: none;
+      border: none;
+      outline: none;
+
+      &::placeholder {
+        color: $color-text-muted;
+      }
+    }
+
+    button {
+      display: flex;
+      color: $color-text-muted;
+    }
+
+    // O contorno de foco vai para o campo inteiro, não só para o input.
+    &:focus-within {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      order: 3;
+      flex-basis: 100%;
+      max-width: none;
+    }
+  }
+
+  &__search-label {
+    @include visually-hidden;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 24px;
+
+    a {
+      display: flex;
+      color: $color-text-muted;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      gap: 16px;
+      margin-left: auto;
+    }
+  }
+
+  &__nav {
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.12);
+  }
+
+  &__nav-list {
+    @include container;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    a {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 8px;
+      padding-block: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $color-text-muted;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-primary;
+      }
+
+      // Escrito dentro do seletor dos links para ter a mesma prioridade
+      // e sobrescrever a cor cinza sem precisar de !important.
+      &.header__nav-link--highlight {
+        font-weight: 600;
+        color: $color-primary;
+      }
+    }
+  }
+}

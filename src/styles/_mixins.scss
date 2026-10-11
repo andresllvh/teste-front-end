@@ -1,0 +1,19 @@
+@use './variables' as *;
+
+// Largura máxima e respiro lateral iguais em todas as seções da página.
+@mixin container {
+  width: 100%;
+  max-width: $container-width;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+// Esconde o elemento na tela, mas mantém o texto para leitores de tela.
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

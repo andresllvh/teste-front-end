@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Header from './components/Header/Header'
 import ProductModal from './components/ProductModal/ProductModal'
 import Showcase, { type LoadStatus } from './components/Showcase/Showcase'
 import { fetchProducts } from './services/products'
@@ -35,21 +36,25 @@ function App() {
   }, [])
 
   return (
-    <main>
-      <Showcase
-        title="Produtos relacionados"
-        products={products}
-        status={status}
-        onSelectProduct={setSelectedProduct}
-      />
+    <>
+      <Header />
 
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
+      <main>
+        <Showcase
+          title="Produtos relacionados"
+          products={products}
+          status={status}
+          onSelectProduct={setSelectedProduct}
         />
-      )}
-    </main>
+
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+          />
+        )}
+      </main>
+    </>
   )
 }
 
