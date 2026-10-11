@@ -1,0 +1,105 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  background-color: $color-footer;
+
+  &__content {
+    @include container;
+
+    display: flex;
+    gap: 64px;
+    padding-block: 48px;
+
+    @media (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  // Linha vertical à direita separa a marca dos links.
+  &__brand {
+    flex: 0 0 420px;
+    padding-right: 64px;
+    border-right: 1px solid $color-border;
+
+    @media (max-width: $breakpoint-mobile) {
+      flex-basis: auto;
+      padding-right: 0;
+      padding-bottom: 32px;
+      border-right: none;
+      border-bottom: 1px solid $color-border;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+  }
+
+  &__description {
+    margin-bottom: 24px;
+    font-size: 0.875rem;
+    color: $color-text-soft;
+  }
+
+  &__social {
+    display: flex;
+    gap: 16px;
+
+    a {
+      display: flex;
+      color: $color-text-soft;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__nav {
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__group {
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    a {
+      font-size: 0.875rem;
+      color: $color-text-soft;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__group-title {
+    margin-bottom: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  &__bottom {
+    padding: 16px 24px;
+    font-size: 0.75rem;
+    color: $color-text-soft;
+    text-align: center;
+    background-color: $color-surface;
+  }
+}
