@@ -1,13 +1,19 @@
-// Valores aproximados, amostrados das capturas do Figma.
-// Serão refinados na etapa de estilo, comparando com o layout.
+// Cores conferidas nas telas do Figma (botões, títulos e textos).
 $font-family: 'Poppins', sans-serif;
 
-$color-primary: #4a58c2; // azul dos botões, títulos e abas ativas
-$color-accent: #f6c21b; // amarelo dos botões "Ver produto", "Confira" e "Comprar" do modal
+$color-primary: #3741b6; // azul dos botões, títulos e abas ativas
+$color-accent: #f7ca13; // amarelo do botão "Comprar" do modal
 $color-dark: #352a5a; // roxo escuro da newsletter
-$color-text: #000000;
+$color-text: #1f1f1f;
+$color-text-soft: #474747;
 $color-text-muted: #959595;
+$color-border: #e2e2e2;
 $color-surface: #ffffff;
 $color-page: #ffffff;
 
-$container-width: 1200px;
+$container-width: 1280px;
+$radius: 8px;
+$shadow-card: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+$breakpoint-tablet: 1024px;
+$breakpoint-mobile: 640px;

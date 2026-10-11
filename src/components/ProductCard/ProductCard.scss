@@ -1,0 +1,62 @@
+@use '../../styles/variables' as *;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  background-color: $color-surface;
+  border-radius: $radius;
+  box-shadow: $shadow-card;
+
+  &__image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 16px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  // Limita o nome a duas linhas para todos os cartões terem a mesma altura.
+  &__name {
+    display: -webkit-box;
+    min-height: 2.8em;
+    margin-bottom: 12px;
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $color-text-soft;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  &__price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &__shipping {
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    color: $color-primary;
+  }
+
+  // margin-top: auto empurra o botão para a base do cartão.
+  &__buy {
+    margin-top: auto;
+    padding: 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $color-surface;
+    text-transform: uppercase;
+    background-color: $color-primary;
+    border-radius: 4px;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(1.15);
+    }
+  }
+}

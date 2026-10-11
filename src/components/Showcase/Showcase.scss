@@ -1,0 +1,131 @@
+@use '../../styles/variables' as *;
+
+.showcase {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 48px 24px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-primary;
+    text-align: center;
+
+    // Linhas finas dos dois lados do título, como no layout.
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: $color-border;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    margin-bottom: 24px;
+    border: 1px solid $color-border;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__tab {
+    flex: 1 0 auto;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: $color-text-soft;
+
+    & + & {
+      border-left: 1px solid $color-border;
+    }
+
+    &[aria-pressed='true'] {
+      font-weight: 600;
+      color: $color-primary;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__message {
+    padding: 48px 0;
+    text-align: center;
+    color: $color-text-soft;
+  }
+
+  &__carousel {
+    position: relative;
+  }
+
+  // Lista com rolagem horizontal; o scroll-snap faz cada rolagem parar
+  // no início de um cartão.
+  &__list {
+    display: flex;
+    gap: 16px;
+    padding: 8px 4px 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 4px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // 4 cartões por linha no desktop, 3 no tablet e 1,2 no celular
+  // (o pedaço do próximo cartão indica que dá para arrastar).
+  &__item {
+    flex: 0 0 calc((100% - 3 * 16px) / 4);
+    scroll-snap-align: start;
+
+    @media (max-width: $breakpoint-tablet) {
+      flex-basis: calc((100% - 2 * 16px) / 3);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      flex-basis: 80%;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: $color-text-soft;
+    background-color: $color-surface;
+    border-radius: 50%;
+    box-shadow: $shadow-card;
+    transform: translateY(-50%);
+
+    &--prev {
+      left: -16px;
+    }
+
+    &--next {
+      right: -16px;
+    }
+
+    // No celular a lista é arrastada com o dedo.
+    @media (max-width: $breakpoint-mobile) {
+      display: none;
+    }
+  }
+}

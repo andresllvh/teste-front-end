@@ -1,5 +1,6 @@
 import type { Product } from '../../types/product'
 import { formatPrice } from '../../utils/formatPrice'
+import './ProductCard.scss'
 
 interface ProductCardProps {
   product: Product

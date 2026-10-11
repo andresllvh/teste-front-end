@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import type { Product } from '../../types/product'
 import { formatPrice } from '../../utils/formatPrice'
+import './ProductModal.scss'
 
 interface ProductModalProps {
   product: Product
