@@ -27,8 +27,8 @@ Pré-requisito: [Node.js](https://nodejs.org/) 20.19 ou superior (recomendado o 
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/andresllvh/teste-front-end-econverse.git
-cd teste-front-end-econverse
+git clone https://github.com/andresllvh/teste-front-end.git
+cd teste-front-end
 
 # 2. Instale as dependências
 npm install
@@ -46,6 +46,30 @@ Depois, acesse [http://localhost:5173](http://localhost:5173).
 | `npm run build` | Verifica os tipos com TypeScript e gera a versão de produção em `dist/` |
 | `npm run preview` | Serve a versão de produção localmente em [http://localhost:4173](http://localhost:4173) |
 | `npm run lint` | Analisa o código com o Oxlint |
+| `npm test` | Roda os testes automatizados uma vez |
+| `npm run test:watch` | Roda os testes e repete a cada alteração no código |
+
+## Como testar
+
+Os testes usam o [Vitest](https://vitest.dev/) e ficam ao lado do arquivo testado, com o final `.test.ts`.
+
+```bash
+npm test
+```
+
+| Arquivo de teste | O que verifica |
+| --- | --- |
+| `src/utils/formatPrice.test.ts` | Conversão do preço em centavos para o formato `R$ 1.499,90` |
+| `src/utils/validateNewsletter.test.ts` | Regras do formulário da newsletter: nome, e-mail e aceite dos termos |
+| `src/services/products.test.ts` | Busca dos produtos: resposta correta, erro de servidor e JSON em formato inesperado (com o `fetch` simulado, sem chamar a API real) |
+
+Para conferir a página manualmente:
+
+1. Rode `npm run dev` e acesse [http://localhost:5173](http://localhost:5173).
+2. Clique em **Comprar** em qualquer produto para abrir o modal, altere a quantidade e feche pelo **X**, pela tecla **Esc** ou clicando fora.
+3. Use as setas da vitrine para navegar entre os produtos.
+4. Envie a newsletter vazia para ver as mensagens de erro e, depois, preenchida corretamente.
+5. Reduza a largura da janela para ver o layout de celular.
 
 ## Estrutura de pastas
 
@@ -68,7 +92,7 @@ src/
 ├── services/        # Busca dos produtos na API
 ├── styles/          # Variáveis, mixins e estilos globais
 ├── types/           # Tipos TypeScript dos dados da API
-├── utils/           # Formatação de preço
+├── utils/           # Formatação de preço e validação da newsletter
 ├── App.tsx          # Monta a página e guarda o estado dos produtos
 └── main.tsx         # Ponto de entrada da aplicação
 ```

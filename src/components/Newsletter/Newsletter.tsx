@@ -1,31 +1,15 @@
 import { useState, type FormEvent } from 'react'
+import {
+  validateNewsletter,
+  type NewsletterErrors,
+} from '../../utils/validateNewsletter'
 import './Newsletter.scss'
-
-interface FormErrors {
-  name?: string
-  email?: string
-  terms?: string
-}
-
-// Formato básico: algo@algo.algo, sem espaços.
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validate(name: string, email: string, acceptedTerms: boolean) {
-  const errors: FormErrors = {}
-
-  if (name.trim().length < 2) errors.name = 'Digite seu nome.'
-  if (!EMAIL_PATTERN.test(email.trim()))
-    errors.email = 'Digite um e-mail válido.'
-  if (!acceptedTerms) errors.terms = 'Aceite os termos para continuar.'
-
-  return errors
-}
 
 function Newsletter() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [acceptedTerms, setAcceptedTerms] = useState(false)
-  const [errors, setErrors] = useState<FormErrors>({})
+  const [errors, setErrors] = useState<NewsletterErrors>({})
   const [subscribed, setSubscribed] = useState(false)
 
   // O teste não tem API de cadastro: o envio só valida os campos
@@ -33,7 +17,7 @@ function Newsletter() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const formErrors = validate(name, email, acceptedTerms)
+    const formErrors = validateNewsletter(name, email, acceptedTerms)
     setErrors(formErrors)
 
     if (Object.keys(formErrors).length === 0) {
