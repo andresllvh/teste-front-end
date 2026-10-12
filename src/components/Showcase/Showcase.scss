@@ -4,34 +4,44 @@
 .showcase {
   @include container;
 
-  padding-block: 48px;
+  margin-top: $section-gap;
 
+  // Título com uma linha de 360px de cada lado, como no layout.
   &__title {
     display: flex;
     align-items: center;
-    gap: 24px;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    font-weight: 600;
+    justify-content: center;
+    gap: 34px;
+    font-size: 1.875rem;
+    font-weight: 700;
     color: $color-primary;
     text-align: center;
 
-    // Linhas finas dos dois lados do título, como no layout.
     &::before,
     &::after {
       content: '';
-      flex: 1;
+      flex: 0 1 360px;
+      min-width: 16px;
       height: 1px;
-      background-color: $color-border;
+      background-color: $color-line;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.5rem;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 
   &__see-all {
     display: block;
     width: fit-content;
-    margin: -12px auto 24px;
-    font-size: 0.875rem;
-    font-weight: 600;
+    margin: 4px auto 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
     color: $color-text;
 
     &:hover {
@@ -41,8 +51,7 @@
 
   &__tabs {
     display: flex;
-    margin-bottom: 24px;
-    border: 1px solid $color-border;
+    margin-top: 4px;
     overflow-x: auto;
     scrollbar-width: none;
 
@@ -51,19 +60,23 @@
     }
   }
 
+  // As bordas vizinhas se sobrepõem (margem de -1px) para não ficarem duplas.
   &__tab {
     flex: 1 0 auto;
-    padding: 8px 16px;
-    font-size: 0.75rem;
+    height: 40px;
+    padding: 0 24px;
+    font-size: 1rem;
+    color: $color-tab;
     text-transform: uppercase;
-    color: $color-text-soft;
+    background-color: $color-surface;
+    border: 1px solid $color-border;
 
     & + & {
-      border-left: 1px solid $color-border;
+      margin-left: -1px;
     }
 
     &[aria-pressed='true'] {
-      font-weight: 600;
+      font-weight: 700;
       color: $color-primary;
     }
 
@@ -75,22 +88,24 @@
   &__message {
     padding: 48px 0;
     text-align: center;
-    color: $color-text-soft;
+    color: $color-text;
   }
 
   &__carousel {
     position: relative;
+    margin-top: 24px;
   }
 
   // Lista com rolagem horizontal; o scroll-snap faz cada rolagem parar
-  // no início de um cartão.
+  // no início de um cartão. O padding vertical deixa espaço para a sombra.
   &__list {
     display: flex;
-    gap: 16px;
-    padding: 8px 4px 16px;
+    gap: 18px;
+    margin-block: -20px;
+    padding: 20px 5px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 4px;
+    scroll-padding-inline: 5px;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -98,43 +113,44 @@
     }
   }
 
-  // 4 cartões por linha no desktop, 3 no tablet e 1,2 no celular
-  // (o pedaço do próximo cartão indica que dá para arrastar).
   &__item {
-    flex: 0 0 calc((100% - 3 * 16px) / 4);
+    flex: 0 0 304px;
     scroll-snap-align: start;
 
-    @media (max-width: $breakpoint-tablet) {
-      flex-basis: calc((100% - 2 * 16px) / 3);
-    }
-
     @media (max-width: $breakpoint-mobile) {
-      flex-basis: 80%;
+      flex-basis: min(304px, 85%);
     }
   }
 
+  // No layout, as setas ficam 42px fora da área dos cartões.
   &__arrow {
     position: absolute;
     top: 50%;
     z-index: 1;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: $color-text-soft;
-    background-color: $color-surface;
-    border-radius: 50%;
-    box-shadow: $shadow-card;
+    display: flex;
     transform: translateY(-50%);
 
     &--prev {
-      left: -16px;
+      left: -42px;
     }
 
+    // A seta da direita é a mesma imagem, espelhada.
     &--next {
-      right: -16px;
+      right: -42px;
+
+      img {
+        transform: scaleX(-1);
+      }
+    }
+
+    @media (max-width: 1400px) {
+      &--prev {
+        left: -20px;
+      }
+
+      &--next {
+        right: -20px;
+      }
     }
 
     // No celular a lista é arrastada com o dedo.

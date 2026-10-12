@@ -1,15 +1,13 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
-$banner-shadow-color: #120c07;
-
 .partner-banners {
   @include container;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding-block: 24px;
+  gap: 12px;
+  margin-top: $section-gap;
 
   @media (max-width: $breakpoint-mobile) {
     grid-template-columns: 1fr;
@@ -18,51 +16,50 @@ $banner-shadow-color: #120c07;
   &__banner {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    min-height: 350px;
-    padding: 40px;
+    height: 350px;
+    padding: 114px 32px 0 44px;
     color: $color-surface;
-    border-radius: 16px;
-    // A foto fica encostada à direita, na altura do banner. O degradê
-    // escurece a esquerda, onde fica o texto, e se funde com a foto.
+    border-radius: 20px;
+    // Degradê do layout: começa transparente a 89px do topo e chega a
+    // preto com 80% de opacidade, escurecendo a parte de baixo da foto.
     background:
       linear-gradient(
-        90deg,
-        $banner-shadow-color 0%,
-        $banner-shadow-color 40%,
-        rgba($banner-shadow-color, 0) 70%
+        to bottom,
+        rgba(0, 0, 0, 0) 89px,
+        rgba(0, 0, 0, 0.8) 311px
       ),
-      url('../../assets/banner-parceiros.webp') right center / auto 100%
-        no-repeat,
-      $banner-shadow-color;
+      url('../../assets/banner-parceiros.webp') center / cover no-repeat;
 
     @media (max-width: $breakpoint-mobile) {
-      min-height: 280px;
-      padding: 32px 24px;
+      height: 280px;
+      padding: 64px 24px 0;
     }
   }
 
   &__title {
-    margin-bottom: 8px;
     font-size: 2.5rem;
     font-weight: 700;
-    line-height: 1.1;
   }
 
   &__text {
-    max-width: 180px;
-    margin-bottom: 32px;
+    max-width: 200px;
+    margin-top: 8px;
   }
 
   &__button {
-    padding: 14px 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 145px;
+    height: 48px;
+    margin-top: 32px;
     font-weight: 700;
-    color: $color-text;
+    color: $color-dark;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 1.28px;
     background-color: $color-accent;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: filter 0.2s;
 
     &:hover {

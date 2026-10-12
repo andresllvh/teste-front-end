@@ -4,23 +4,30 @@
 .categories {
   @include container;
 
-  padding-top: 40px;
+  margin-top: 39px;
 
   // O layout não mostra título nesta seção; ele fica só para leitores de tela.
   &__title {
     @include visually-hidden;
   }
 
+  // O padding dá espaço para as sombras, que seriam cortadas pela rolagem.
   &__list {
     display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 4px 4px 8px;
+    justify-content: center;
+    gap: 42px;
+    margin: -12px;
+    padding: 12px;
     overflow-x: auto;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
       display: none;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      justify-content: flex-start;
+      gap: 24px;
     }
   }
 
@@ -28,40 +35,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 22px;
     font-size: 0.875rem;
+    font-weight: 500;
     color: $color-text-soft;
     white-space: nowrap;
 
-    &[aria-pressed='true'] {
+    &[aria-current='true'] {
       font-weight: 600;
-      color: $color-primary;
+      color: $color-highlight;
 
       .categories__icon {
-        color: $color-primary;
         background-color: $color-surface;
+        box-shadow: 0 2px 9px rgba(0, 0, 0, 0.22);
       }
-    }
-
-    &:hover .categories__icon {
-      color: $color-primary;
     }
   }
 
   &__icon {
     display: grid;
     place-items: center;
-    width: 120px;
-    height: 120px;
-    color: $color-text;
+    width: 128px;
+    height: 128px;
     background-color: $color-muted-surface;
     border-radius: $radius;
-    box-shadow: $shadow-card;
-    transition: color 0.2s;
+    box-shadow: 0 4px 11px rgba(0, 0, 0, 0.13);
 
     @media (max-width: $breakpoint-mobile) {
       width: 88px;
       height: 88px;
+
+      img {
+        width: 42px;
+        height: 42px;
+      }
     }
   }
 }

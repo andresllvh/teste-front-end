@@ -1,36 +1,27 @@
-import { useState, type ComponentType } from 'react'
-import type { IconProps } from '../icons/Icon'
-import {
-  DrinksIcon,
-  FashionIcon,
-  FitnessIcon,
-  HealthIcon,
-  SupermarketIcon,
-  TechnologyIcon,
-  ToolsIcon,
-} from '../icons/categoryIcons'
+import drinksIcon from '../../assets/categories/bebidas.webp'
+import fitnessIcon from '../../assets/categories/esportes.webp'
+import toolsIcon from '../../assets/categories/ferramentas.webp'
+import fashionIcon from '../../assets/categories/moda.webp'
+import healthIcon from '../../assets/categories/saude.webp'
+import supermarketIcon from '../../assets/categories/supermercado.webp'
+import technologyIcon from '../../assets/categories/tecnologia.webp'
 import './Categories.scss'
 
-interface Category {
-  name: string
-  Icon: ComponentType<IconProps>
-}
-
-const CATEGORIES: Category[] = [
-  { name: 'Tecnologia', Icon: TechnologyIcon },
-  { name: 'Supermercado', Icon: SupermarketIcon },
-  { name: 'Bebidas', Icon: DrinksIcon },
-  { name: 'Ferramentas', Icon: ToolsIcon },
-  { name: 'Saúde', Icon: HealthIcon },
-  { name: 'Esportes e Fitness', Icon: FitnessIcon },
-  { name: 'Moda', Icon: FashionIcon },
+const CATEGORIES = [
+  { name: 'Tecnologia', icon: technologyIcon },
+  { name: 'Supermercado', icon: supermarketIcon },
+  { name: 'Bebidas', icon: drinksIcon },
+  { name: 'Ferramentas', icon: toolsIcon },
+  { name: 'Saúde', icon: healthIcon },
+  { name: 'Esportes e Fitness', icon: fitnessIcon },
+  { name: 'Moda', icon: fashionIcon },
 ]
 
-function Categories() {
-  // Assim como as abas da vitrine, a seleção é só visual: a API não
-  // informa a categoria de cada produto.
-  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].name)
+// Como no layout, "Tecnologia" aparece destacada. Os ícones são as
+// ilustrações originais, cada uma com a sua cor.
+const HIGHLIGHTED_CATEGORY = 'Tecnologia'
 
+function Categories() {
   return (
     <section className="categories" aria-labelledby="categories-title">
       <h2 id="categories-title" className="categories__title">
@@ -38,19 +29,18 @@ function Categories() {
       </h2>
 
       <ul className="categories__list">
-        {CATEGORIES.map(({ name, Icon }) => (
+        {CATEGORIES.map(({ name, icon }) => (
           <li key={name}>
-            <button
-              type="button"
+            <a
+              href="#"
               className="categories__item"
-              aria-pressed={name === activeCategory}
-              onClick={() => setActiveCategory(name)}
+              aria-current={name === HIGHLIGHTED_CATEGORY ? 'true' : undefined}
             >
               <span className="categories__icon">
-                <Icon size={56} strokeWidth={1} />
+                <img src={icon} alt="" width={61} height={61} />
               </span>
               {name}
-            </button>
+            </a>
           </li>
         ))}
       </ul>

@@ -1,18 +1,21 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
+// Três faixas, como no layout: barra superior (32px), faixa principal
+// (72px) e menu (40px), totalizando 144px.
 .header {
-  &__topbar {
-    border-bottom: 1px solid $color-border;
+  &__topbar,
+  &__main,
+  &__nav {
+    @include container;
   }
 
   &__benefits {
-    @include container;
-
     display: flex;
     justify-content: center;
-    gap: 64px;
-    padding-block: 8px;
+    gap: 119px;
+    height: 32px;
+    border-bottom: 1px solid $color-divider;
     overflow-x: auto;
     scrollbar-width: none;
 
@@ -20,58 +23,67 @@
       display: flex;
       flex-shrink: 0;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       font-size: 0.75rem;
+      font-weight: 500;
       color: $color-text-muted;
+      white-space: nowrap;
     }
 
     strong {
       font-weight: 600;
-      color: $color-primary;
+      color: $color-highlight;
     }
 
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-tablet) {
       justify-content: flex-start;
-      gap: 32px;
+      gap: 40px;
     }
   }
 
+  // Logo à esquerda, busca centralizada e ícones à direita.
   &__main {
-    @include container;
-
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 630px) 1fr;
     align-items: center;
-    gap: 40px;
-    padding-block: 20px;
+    gap: 24px;
+    height: 72px;
 
-    // No celular a busca desce para uma linha própria.
     @media (max-width: $breakpoint-mobile) {
-      flex-wrap: wrap;
-      gap: 16px;
+      grid-template-columns: auto 1fr;
+      row-gap: 12px;
+      height: auto;
+      padding-block: 12px;
     }
   }
 
   &__logo {
     display: flex;
-    font-size: 1.75rem;
+    justify-self: start;
+
+    @media (max-width: $breakpoint-mobile) {
+      img {
+        width: 110px;
+        height: auto;
+      }
+    }
   }
 
   &__search {
     display: flex;
-    flex: 1;
     align-items: center;
-    max-width: 640px;
-    margin-inline: auto;
-    padding-right: 16px;
+    height: 48px;
+    padding: 0 16px 0 24px;
     background-color: $color-input;
     border-radius: $radius;
 
     input {
       flex: 1;
       min-width: 0;
-      padding: 14px 20px;
+      height: 100%;
       font: inherit;
       font-size: 0.875rem;
+      font-weight: 500;
       color: $color-text;
       background: none;
       border: none;
@@ -84,7 +96,6 @@
 
     button {
       display: flex;
-      color: $color-text-muted;
     }
 
     // O contorno de foco vai para o campo inteiro, não só para o input.
@@ -94,9 +105,8 @@
     }
 
     @media (max-width: $breakpoint-mobile) {
-      order: 3;
-      flex-basis: 100%;
-      max-width: none;
+      grid-column: 1 / -1;
+      grid-row: 2;
     }
   }
 
@@ -106,34 +116,38 @@
 
   &__actions {
     display: flex;
-    gap: 24px;
+    justify-self: end;
+    align-items: center;
+    gap: 32px;
 
     a {
       display: flex;
-      color: $color-text-muted;
-      transition: color 0.2s;
-
-      &:hover {
-        color: $color-primary;
-      }
     }
 
     @media (max-width: $breakpoint-mobile) {
       gap: 16px;
-      margin-left: auto;
+
+      img {
+        width: 26px;
+        height: 26px;
+      }
     }
   }
 
-  &__nav {
-    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.12);
+  // O ícone de pedidos é menor (24px) e espelhado no layout.
+  &__action-icon--package {
+    width: 24px;
+    height: 24px;
+    transform: scaleX(-1);
   }
 
   &__nav-list {
-    @include container;
-
     display: flex;
-    justify-content: space-between;
-    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 91px;
+    height: 40px;
+    box-shadow: 0 8px 16px rgba(57, 48, 19, 0.12);
     overflow-x: auto;
     scrollbar-width: none;
 
@@ -141,25 +155,25 @@
       display: flex;
       flex-shrink: 0;
       align-items: center;
-      gap: 8px;
-      padding-block: 12px;
+      gap: 12px;
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       color: $color-text-muted;
       text-transform: uppercase;
       white-space: nowrap;
-      transition: color 0.2s;
 
       &:hover {
         color: $color-primary;
       }
 
-      // Escrito dentro do seletor dos links para ter a mesma prioridade
-      // e sobrescrever a cor cinza sem precisar de !important.
       &.header__nav-link--highlight {
-        font-weight: 600;
-        color: $color-primary;
+        color: $color-highlight;
       }
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      justify-content: flex-start;
+      gap: 32px;
     }
   }
 }

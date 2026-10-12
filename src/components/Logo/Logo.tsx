@@ -1,12 +1,21 @@
-import './Logo.scss'
+import logo from '../../assets/logo.svg'
 
-// O tamanho vem do font-size de quem usa o logo: todas as medidas
-// internas estão em "em" e acompanham esse valor.
-function Logo() {
+interface LogoProps {
+  width: number
+  // Vazio quando o link ao redor já tem nome (aria-label).
+  alt?: string
+}
+
+// O SVG do layout mantém a proporção: basta informar a largura.
+function Logo({ width, alt = '' }: LogoProps) {
   return (
-    <span className="logo">
-      <span className="logo__mark">ec</span>onverse
-    </span>
+    <img
+      className="logo"
+      src={logo}
+      alt={alt}
+      width={width}
+      height={Math.round(width * (41.3 / 139))}
+    />
   )
 }
 

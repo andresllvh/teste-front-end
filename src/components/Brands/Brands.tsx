@@ -15,7 +15,7 @@ function Brands() {
         {BRANDS.map((brand) => (
           <li key={brand}>
             <a href="#" className="brands__item">
-              <Logo />
+              <Logo width={117} alt="Econverse" />
             </a>
           </li>
         ))}

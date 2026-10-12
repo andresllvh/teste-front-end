@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
+import closeLine1 from '../../assets/icons/close-line-1.svg'
+import closeLine2 from '../../assets/icons/close-line-2.svg'
+import minusIcon from '../../assets/icons/minus.svg'
+import plusIcon from '../../assets/icons/plus.svg'
 import type { Product } from '../../types/product'
 import { formatPrice } from '../../utils/formatPrice'
 import './ProductModal.scss'
@@ -55,15 +59,16 @@ function ProductModal({ product, onClose }: ProductModalProps) {
           aria-label="Fechar"
           onClick={closeModal}
         >
-          ×
+          <img src={closeLine1} alt="" width={20} height={2} />
+          <img src={closeLine2} alt="" width={18} height={2} />
         </button>
 
         <img
           className="product-modal__image"
           src={product.photo}
           alt={product.productName}
-          width={363}
-          height={363}
+          width={247}
+          height={192}
         />
 
         <div className="product-modal__info">
@@ -74,6 +79,9 @@ function ProductModal({ product, onClose }: ProductModalProps) {
           <p className="product-modal__description">
             {product.descriptionShort}
           </p>
+          <a href="#" className="product-modal__details">
+            Veja mais detalhes do produto &gt;
+          </a>
 
           <div className="product-modal__actions">
             <div className="product-modal__quantity">
@@ -83,7 +91,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                 onClick={decreaseQuantity}
                 disabled={quantity === 1}
               >
-                −
+                <img src={minusIcon} alt="" width={20} height={20} />
               </button>
               <output aria-live="polite" aria-label="Quantidade">
                 {String(quantity).padStart(2, '0')}
@@ -93,7 +101,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                 aria-label="Aumentar quantidade"
                 onClick={increaseQuantity}
               >
-                +
+                <img src={plusIcon} alt="" width={20} height={20} />
               </button>
             </div>
 

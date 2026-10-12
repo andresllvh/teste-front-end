@@ -1,15 +1,13 @@
 import type { FormEvent } from 'react'
-import {
-  BoxIcon,
-  CardIcon,
-  CartIcon,
-  CrownIcon,
-  HeartIcon,
-  SearchIcon,
-  ShieldIcon,
-  TruckIcon,
-  UserIcon,
-} from '../icons/headerIcons'
+import creditCardIcon from '../../assets/icons/credit-card.svg'
+import crownIcon from '../../assets/icons/crown-simple.svg'
+import heartIcon from '../../assets/icons/heart.svg'
+import searchIcon from '../../assets/icons/magnifying-glass.svg'
+import packageIcon from '../../assets/icons/package.svg'
+import shieldIcon from '../../assets/icons/shield-check.svg'
+import cartIcon from '../../assets/icons/shopping-cart.svg'
+import truckIcon from '../../assets/icons/truck.svg'
+import userIcon from '../../assets/icons/user-circle.svg'
 import Logo from '../Logo/Logo'
 import './Header.scss'
 
@@ -19,6 +17,13 @@ const CATEGORIES = [
   'Livros',
   'Moda',
   'Lançamentos',
+]
+
+const ACTIONS = [
+  { label: 'Meus pedidos', icon: packageIcon, modifier: 'package' },
+  { label: 'Favoritos', icon: heartIcon },
+  { label: 'Minha conta', icon: userIcon },
+  { label: 'Carrinho', icon: cartIcon },
 ]
 
 function Header() {
@@ -32,16 +37,22 @@ function Header() {
       <div className="header__topbar">
         <ul className="header__benefits">
           <li>
-            <ShieldIcon size={16} />
-            Compra <strong>100% segura</strong>
+            <img src={shieldIcon} alt="" width={20} height={20} />
+            <span>
+              Compra <strong>100% segura</strong>
+            </span>
           </li>
           <li>
-            <TruckIcon size={16} />
-            <strong>Frete grátis</strong> acima de R$ 200
+            <img src={truckIcon} alt="" width={20} height={20} />
+            <span>
+              <strong>Frete grátis</strong> acima de R$ 200
+            </span>
           </li>
           <li>
-            <CardIcon size={16} />
-            <strong>Parcele</strong> suas compras
+            <img src={creditCardIcon} alt="" width={20} height={20} />
+            <span>
+              <strong>Parcele</strong> suas compras
+            </span>
           </li>
         </ul>
       </div>
@@ -52,7 +63,7 @@ function Header() {
           className="header__logo"
           aria-label="Econverse, página inicial"
         >
-          <Logo />
+          <Logo width={139} />
         </a>
 
         <form className="header__search" role="search" onSubmit={handleSearch}>
@@ -65,31 +76,28 @@ function Header() {
             placeholder="O que você está buscando?"
           />
           <button type="submit" aria-label="Buscar">
-            <SearchIcon />
+            <img src={searchIcon} alt="" width={28} height={28} />
           </button>
         </form>
 
         <ul className="header__actions">
-          <li>
-            <a href="#" aria-label="Meus pedidos">
-              <BoxIcon />
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Favoritos">
-              <HeartIcon />
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Minha conta">
-              <UserIcon />
-            </a>
-          </li>
-          <li>
-            <a href="#" aria-label="Carrinho">
-              <CartIcon />
-            </a>
-          </li>
+          {ACTIONS.map((action) => (
+            <li key={action.label}>
+              <a href="#" aria-label={action.label}>
+                <img
+                  className={
+                    action.modifier
+                      ? `header__action-icon--${action.modifier}`
+                      : undefined
+                  }
+                  src={action.icon}
+                  alt=""
+                  width={32}
+                  height={32}
+                />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -106,8 +114,8 @@ function Header() {
             </a>
           </li>
           <li>
-            <a href="#" className="header__nav-link--icon">
-              <CrownIcon size={18} />
+            <a href="#">
+              <img src={crownIcon} alt="" width={20} height={20} />
               Assinatura
             </a>
           </li>

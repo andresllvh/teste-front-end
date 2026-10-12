@@ -1,4 +1,6 @@
-import { FacebookIcon, InstagramIcon, LinkedinIcon } from '../icons/socialIcons'
+import facebookIcon from '../../assets/icons/facebook.svg'
+import instagramIcon from '../../assets/icons/instagram.svg'
+import linkedinIcon from '../../assets/icons/linkedin.svg'
 import Logo from '../Logo/Logo'
 import './Footer.scss'
 
@@ -22,9 +24,9 @@ const LINK_GROUPS = [
 ]
 
 const SOCIAL_LINKS = [
-  { name: 'Instagram', Icon: InstagramIcon },
-  { name: 'Facebook', Icon: FacebookIcon },
-  { name: 'LinkedIn', Icon: LinkedinIcon },
+  { name: 'Instagram', icon: instagramIcon },
+  { name: 'Facebook', icon: facebookIcon },
+  { name: 'LinkedIn', icon: linkedinIcon },
 ]
 
 function Footer() {
@@ -37,16 +39,16 @@ function Footer() {
             className="footer__logo"
             aria-label="Econverse, página inicial"
           >
-            <Logo />
+            <Logo width={139} />
           </a>
           <p className="footer__description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <ul className="footer__social">
-            {SOCIAL_LINKS.map(({ name, Icon }) => (
+            {SOCIAL_LINKS.map(({ name, icon }) => (
               <li key={name}>
                 <a href="#" aria-label={`Econverse no ${name}`}>
-                  <Icon size={20} />
+                  <img src={icon} alt="" width={24} height={24} />
                 </a>
               </li>
             ))}

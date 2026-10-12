@@ -21,21 +21,20 @@
   &__brand {
     flex: 0 0 420px;
     padding-right: 64px;
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-line;
 
     @media (max-width: $breakpoint-mobile) {
       flex-basis: auto;
       padding-right: 0;
       padding-bottom: 32px;
       border-right: none;
-      border-bottom: 1px solid $color-border;
+      border-bottom: 1px solid $color-line;
     }
   }
 
   &__logo {
     display: inline-flex;
     margin-bottom: 16px;
-    font-size: 1.5rem;
   }
 
   &__description {

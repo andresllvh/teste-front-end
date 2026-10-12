@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import type { Product } from '../../types/product'
+import arrowIcon from '../../assets/icons/arrow.svg'
 import ProductCard from '../ProductCard/ProductCard'
 import './Showcase.scss'
 
@@ -94,7 +95,7 @@ function Showcase({
             aria-label="Produtos anteriores"
             onClick={() => scrollList(-1)}
           >
-            ‹
+            <img src={arrowIcon} alt="" width={40} height={40} />
           </button>
 
           <ul ref={listRef} className="showcase__list">
@@ -111,7 +112,7 @@ function Showcase({
             aria-label="Próximos produtos"
             onClick={() => scrollList(1)}
           >
-            ›
+            <img src={arrowIcon} alt="" width={40} height={40} />
           </button>
         </div>
       )}
