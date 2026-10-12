@@ -9,8 +9,9 @@ Página inicial de uma loja virtual, desenvolvida a partir do layout do Figma do
 - **Modal de detalhes** com o elemento `<dialog>` nativo: fecha pelo botão, pela tecla Esc ou com um clique no fundo, e devolve o foco ao botão que o abriu.
 - **Seletor de quantidade** no modal, com mínimo de 1 unidade.
 - **Newsletter** com validação de nome, e-mail e aceite dos termos, e mensagens de erro acessíveis.
+- **Cartões de produto** com parcelamento em 2x sem juros calculado a partir do preço.
 - **Layout responsivo** para celular, tablet e desktop.
-- Header, banner principal, categorias, banners de parceiros, marcas e footer conforme o layout.
+- Header, banner principal, categorias, banners de parceiros, marcas, newsletter e footer conforme o layout.
 
 ## Tecnologias
 
@@ -19,7 +20,7 @@ Página inicial de uma loja virtual, desenvolvida a partir do layout do Figma do
 - [Sass (SCSS)](https://sass-lang.com/) com variáveis, mixins e padrão BEM
 - [Oxlint](https://oxc.rs/docs/guide/usage/linter) para análise do código
 
-Nenhuma biblioteca de componentes ou de ícones foi usada: os ícones são SVGs próprios.
+Nenhuma biblioteca de componentes ou de ícones foi usada. As fontes são a Poppins e a Work Sans, do Google Fonts, como no layout.
 
 ## Como rodar o projeto
 
@@ -60,6 +61,7 @@ npm test
 | Arquivo de teste | O que verifica |
 | --- | --- |
 | `src/utils/formatPrice.test.ts` | Conversão do preço em centavos para o formato `R$ 1.499,90` |
+| `src/utils/calculateInstallment.test.ts` | Valor de cada parcela, com arredondamento para o centavo |
 | `src/utils/validateNewsletter.test.ts` | Regras do formulário da newsletter: nome, e-mail e aceite dos termos |
 | `src/services/products.test.ts` | Busca dos produtos: resposta correta, erro de servidor e JSON em formato inesperado (com o `fetch` simulado, sem chamar a API real) |
 
@@ -75,7 +77,7 @@ Para conferir a página manualmente:
 
 ```
 src/
-├── assets/          # Imagens dos banners (WebP)
+├── assets/          # Logo, ícones (SVG) e imagens (WebP) exportados do layout
 ├── components/      # Um componente por pasta, com seu .tsx e seu .scss
 │   ├── Header/
 │   ├── Hero/
@@ -87,17 +89,20 @@ src/
 │   ├── Brands/
 │   ├── Newsletter/
 │   ├── Footer/
-│   ├── Logo/
-│   └── icons/           # Componente base de ícone e os ícones SVG
+│   └── Logo/
 ├── services/        # Busca dos produtos na API
 ├── styles/          # Variáveis, mixins e estilos globais
 ├── types/           # Tipos TypeScript dos dados da API
-├── utils/           # Formatação de preço e validação da newsletter
+├── utils/           # Formatação de preço, parcelamento e validação da newsletter
 ├── App.tsx          # Monta a página e guarda o estado dos produtos
 └── main.tsx         # Ponto de entrada da aplicação
 ```
 
 ## Decisões técnicas
+
+### Fidelidade ao layout
+
+As medidas, cores, fontes e espaçamentos foram extraídos do arquivo do Figma. As cores oficiais do layout ficam em `src/styles/_variables.scss`, e o logo, os ícones e as fotos são os arquivos originais do layout, com as fotos recortadas no mesmo enquadramento do Figma.
 
 ### Proxy para a API (CORS)
 
@@ -117,26 +122,27 @@ A API envia o preço como número inteiro (ex.: `149990`). Esse valor correspond
 
 O layout mostra preço antigo, parcelamento e categorias de produto, mas a API não traz esses campos. Para não exibir valores inventados:
 
-- os cartões mostram apenas nome, foto, preço e frete;
-- as abas da vitrine e os cartões de categoria só destacam a seleção visualmente, sem filtrar a lista.
+- o parcelamento é calculado a partir do preço real (2x sem juros);
+- o preço antigo não é exibido, pois não há como obtê-lo;
+- as abas da vitrine só destacam a seleção visualmente, sem filtrar a lista, e a categoria "Tecnologia" fica destacada como no layout.
 
 ### Acessibilidade
 
 - HTML semântico: `header`, `main`, `nav`, `section`, `footer`, títulos em ordem e um único `h1`.
 - Ícones decorativos ocultos de leitores de tela, e links de ícone com `aria-label`.
 - Campos de formulário com `label`, e erros ligados aos campos com `aria-describedby`.
-- Contraste de cores dentro do mínimo da WCAG AA.
+- O cinza oficial do layout (`#9F9F9F`) foi mantido por fidelidade ao design, embora tenha contraste abaixo do recomendado pela WCAG para textos pequenos.
 
 ### Desempenho
 
-- Imagens dos banners em WebP (o banner principal caiu de 269 KB para 74 KB).
+- Imagens em WebP e no tamanho em que são exibidas (o banner principal tem 58 KB).
 - Imagens dos produtos com `loading="lazy"` e dimensões definidas, evitando saltos no layout.
 
 Medição local com o Lighthouse (simulação de celular), na versão de produção:
 
 | Desempenho | Acessibilidade | Boas práticas | SEO |
 | :---: | :---: | :---: | :---: |
-| 88 | 100 | 100 | 100 |
+| 85 | 96 | 100 | 100 |
 
 ## Limitações conhecidas
 
